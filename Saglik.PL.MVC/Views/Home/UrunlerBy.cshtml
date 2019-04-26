@@ -6,7 +6,7 @@
             <div><span class="badge default-bg">%50 indirim</span></div>
             <h3 class="title"><span>@item.urunAd</span></h3>
             <div class="overlay-container">
-                <img src="@item.urunResimYolu1" alt="@item.urunAd" title="@item.urunAd">
+                <img src="~/images/@item.urunResimYolu1" alt="@item.urunAd" title="@item.urunAd" height="200" width="300">
                 <a href="/Home/UrunDetay/@item.Id" class="overlay small">
                     <i class="fa fa-plus"></i>
                     <span>detaylar...</span>
@@ -21,7 +21,10 @@
         </div>
     }
 </div>
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/bootstrap")
 <script type="text/javascript">
+
     function Ekle(id, adet) {
         $.ajax({
             type: "GET",

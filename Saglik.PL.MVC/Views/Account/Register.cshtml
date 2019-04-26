@@ -1,0 +1,77 @@
+﻿@model List<Saglik.PL.MVC.Models.RegisterVM>
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LayoutSaglik.cshtml";
+}
+
+<form id="frmuye" method="post" action="/Account/Register">
+    <div class="form-group">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="col-md-2">
+                    <label>Adı</label>
+                </div>
+                <div class="col-md-10">
+                    <input class="form-control" type="text" name="ad" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-2">
+                    <label>Soyadı</label>
+                </div>
+                <div class="col-md-10">
+                    <input class="form-control" type="text" name="soyad" />
+                </div>
+            </div>
+            <div class="col-md-12"><br /></div>
+            <div class="col-md-6">
+                <div class="col-md-2">
+                    <label>Tc No</label>
+                </div>
+                <div class="col-md-10">
+                    <input class="form-control" type="text" name="tckno" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-2">
+                    <label>Adres</label>
+                </div>
+                <div class="col-md-10">
+                    <input class="form-control" type="text" name="adres" />
+                </div>
+            </div>
+            <div class="col-md-12"><br /></div>
+            <div class="col-md-6">
+                <div class="col-md-2">
+                    <label>Şifre</label>
+                </div>
+                <div class="col-md-10">
+                    <input class="form-control" type="text" name="Password" />
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="col-md-2">
+                    <label>Email</label>
+                </div>
+                <div class="col-md-10">
+                    <input class="form-control" type="text" name="Email" />
+                </div>
+            </div>
+            <div class="col-md-12"><br /></div>
+
+            <div class="col-md-6">
+                <div class="col-md-2">
+                    <label>Şifre Tekrar</label>
+                </div>
+                <div class="col-md-10">
+                    <input class="form-control" type="text" name="ConfirmPassword" />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="form-group">
+        <button type="submit" class="btn btn-danger">Kayıt Ol</button>
+    </div>
+</form>
