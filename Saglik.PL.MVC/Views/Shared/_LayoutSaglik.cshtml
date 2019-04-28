@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html>
 <head>
     <title>e-Ticaret MasterPage</title>
@@ -89,74 +90,63 @@
                             <!-- header top dropdowns start -->
                             <!-- ================ -->
                             <div class="header-top-dropdown">
-                                <div class="btn-group dropdown">
-                                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-search"></i> Bul</button>
-                                    <ul class="dropdown-menu dropdown-menu-right dropdown-animation">
-                                        <li>
-                                            <form role="search" class="search-box">
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <div class="btn-group dropdown">
+                                        <a class="btn dropdown-toggle"><i class="fa fa-user"></i> @User.Identity.Name</a>
+                                    </div>
+                                }
 
-                                                <div class="form-group has-feedback">
-                                                    <input type="text" class="form-control" placeholder="Search">
-                                                    <i class="fa fa-search form-control-feedback"></i>
-                                                </div>
-
-                                            </form>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                                <div class="btn-group dropdown">
-                                    <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i> Login</button>
-                                    <ul class="dropdown-menu dropdown-menu-right dropdown-animation">
-                                        <li>
-                                            <form id="frm" method="post" action="/Account/Login" class="login-form">
-                                                <div class="form-group has-feedback">
-                                                    <label class="control-label">Username</label>
-                                                    <input name="username" type="text" class="form-control" placeholder="">
-                                                    <i class="fa fa-user form-control-feedback"></i>
-                                                </div>
-                                                <div class="form-group has-feedback">
-                                                    <label class="control-label">Password</label>
-                                                    <input name="password" type="password" class="form-control" placeholder="">
-                                                    <i class="fa fa-lock form-control-feedback"></i>
-                                                </div>
-                                                <button id="btnLogin" type="submit" class="btn btn-group btn-dark btn-sm" onclick="Login()">Log In</button>
-
+                                @if (User.Identity.IsAuthenticated)
+                                {
+                                    <div class="btn-group dropdown">
+                                        <a href="/Account/LogOut" class="btn dropdown-toggle"><i class="fa fa-sign-out"></i> Çıkış Yap</a>
+                                        <form method="post" action="/Account/LogOut"></form>
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div class="btn-group dropdown">
+                                        <a class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-sign-in"></i> Giriş Yap</a>
+                                        <ul class="dropdown-menu dropdown-menu-right dropdown-animation">
+                                            <li>
+                                                <form id="frm" method="post" action="/Account/Login" class="login-form">
+                                                    <div class="form-group has-feedback">
+                                                        <label class="control-label">Username</label>
+                                                        <input name="username" type="text" class="form-control" placeholder="">
+                                                        <i class="fa fa-user form-control-feedback"></i>
+                                                    </div>
+                                                    <div class="form-group has-feedback">
+                                                        <label class="control-label">Password</label>
+                                                        <input name="password" type="password" class="form-control" placeholder="">
+                                                        <i class="fa fa-lock form-control-feedback"></i>
+                                                    </div>
+                                                    <button id="btnLogissn" type="submit" class="btn btn-group btn-dark btn-sm">Log In</button>
+                                                </form>
                                                 <span>or</span>
                                                 <a id="btnRegister" href="/Account/Register" class="btn btn-group btn-default btn-sm" onclick="Register">Kayıt Ol</a>
                                                 <ul>
                                                     <li><a href="#">Forgot your password?</a></li>
                                                 </ul>
-                                            </form>
-                                        </li>
-                                    </ul>
-                                </div>
+
+                                            </li>
+                                        </ul>
+                                    </div>
+
+                                }
                                 <div class="btn-group dropdown">
-                                    <form id="frm2" method="post" action="/Sepet/Index" class="login-form">
                                         <div id="sepet" class="btn-group dropdown">
-                                            <button type="button" class="btn dropdown-toggle" data-toggle="dropdown"><i class="fa fa-shopping-cart"></i>Sepet (@if (Session["toplamadet"] != null) { Session["toplamadet"].ToString(); } )</button>
-
+                                            <a href="/Sepet/Index" class="btn dropdown-toggle"><i class="fa fa-shopping-cart"></i>Sepet (@if (Session["toplamadet"] != null) { Session["toplamadet"].ToString(); } )</a>
                                         </div>
-                                    </form>
                                 </div>
-                                
-
                             </div>
 
                             <!--  header top dropdowns end -->
-
-
                         </div>
-
                         <!-- header-top-second end -->
-
-
                     </div>
-
                 </div>
-
             </div>
-
         </div>
 
         <!-- header-top end -->
@@ -216,11 +206,6 @@
                                                 <li class="dropdown">
                                                     <a href="/Home/Index">Anasayfa</a>
                                                 </li>
-                                                <!-- mega-menu start -->
-                                                <li class="dropdown mega-menu">
-                                                    <a href="/Home/Index">Ürünlerimiz</a>
-
-                                                </li>
                                                 <!-- mega-menu end -->
                                                 <li class="dropdown">
                                                     <a href="/Sepet/Index">Sepet</a>
@@ -231,9 +216,13 @@
                                                     <a href="#">SSS</a>
                                                 </li>
                                                 <!-- mega-menu end -->
-                                                <li class="dropdown">
-                                                    <a href="#">Üye Kayıt</a>
-                                                </li>
+                                                @if (!User.Identity.IsAuthenticated)
+                                                {
+                                                    <li class="dropdown">
+                                                        <a href="/Account/Register">Üye Kayıt</a>
+                                                    </li>
+                                                }
+
                                                 <li class="dropdown">
                                                     <a href="#">İletişim</a>
 
@@ -395,8 +384,9 @@
     <!-- JavaScript files placed at the end of the document so the pages load faster
     ================================================== -->
     <!-- Jquery and Bootstap core js files -->
+
     <script type="text/javascript" src="../Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script type="text/javascript" src="../Scripts/jquery-3.3.1.min.js"></script>
 
     @*<!-- Modernizr javascript -->
         <script type="text/javascript" src="../Content/modernizr.js"></script>
@@ -426,7 +416,7 @@
     <script src="/Content/plugins/jquery.validate.js"></script>
 
     <!-- Initialization of Plugins -->
-    <script type="text/javascript" src="/Content/js/template.js"></script>
+    @*<script type="text/javascript" src="/Content/js/template.js"></script>*@
 
     <!-- Custom Scripts -->
     <script type="text/javascript" src="/Content/js/custom.js"></script>

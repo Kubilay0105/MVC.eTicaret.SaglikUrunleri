@@ -29,7 +29,15 @@
 
                 <!-- page-title start -->
                 <!-- ================ -->
-                <h1 class="page-title margin-top-clear">Alışveriş Sepeti</h1>
+
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <h1 class="page-title margin-top-clear">Alışveriş Sepeti</h1>
+                }
+                else
+                {
+                    <h1 class="page-title margin-top-clear">Alışveriş Sepeti <h5>(Satın Almak için Giriş Yapmalısınız)</h5></h1>
+                }
                 <!-- page-title end -->
                 <div class="space"></div>
                 <table class="table cart table-hover table-striped">
@@ -51,8 +59,8 @@
                                 <td class="quantity">
                                     @item.adet
                                     @*<div class="form-group">
-                        <input type="text" class="form-control" value="2">
-                    </div>*@
+                                <input type="text" class="form-control" value="2">
+                            </div>*@
                                 </td>
                                 <td class="remove">
                                     <input id="btnSil" type="image" class="small" src="~/Content/images/delete.png" width="20" height="20" onclick="Sil('@item.urunId')" />
@@ -65,19 +73,22 @@
                                 @if (Session["toplamadet"] != null)
                                 {
                                     @Session["toplamadet"].ToString()} adet
-                        </td>
-                        <td class="total-amount">
-                            @if (Session["toplamtutar"] != null)
-                            {
-                                @Session["toplamtutar"].ToString();
-                            }
-                    </td>
-                    </tr>
+                            </td>
+                            <td class="total-amount">
+                                @if (Session["toplamtutar"] != null)
+                                {
+                                    @Session["toplamtutar"].ToString();
+                                }
+                            </td>
+                        </tr>
                     </tbody>
                 </table>
                 <div class="text-right">
                     <a href="/Home/Index" class="btn btn-group btn-default btn-sm">Alışverişe Devam</a>
-                    <a href="/Account/Login" class="btn btn-group btn-default btn-sm">Satın Al</a>
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        <a href="/Account/Login" class="btn btn-group btn-default btn-sm">Satın Al</a>
+                    }
                 </div>
             </div>
             <!-- main end -->
